@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Unos Natjecanja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Unos Natjecanja</h1>
+    <form th:action="@{/competition}" method="post">
+        <label for="name">Naziv Natjecanja:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <br>
+       <label for="scoringSystem">Sustav Bodovanja (npr. 3/1/0):</label>
+<input type="text" id="scoringSystem" name="scoringSystem" required pattern="\d+(\.\d+)?/\d+(\.\d+)?/\d+(\.\d+)?" title="Unesite sustav bodovanja u obliku brojeva razdvojenih znakom / (npr. 3/1/0 ili 1/0.5/0)">
+
+<br>
+<label for="participants">Sudionici (razdvojeni znakom ;):</label>
+<input type="text" id="participants" name="participants" required>
+        <br>
+        <button type="submit">Spremi Natjecanje</button>
+    </form>
+</body>
+</html>

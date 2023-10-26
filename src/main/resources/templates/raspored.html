@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Raspored Kola</title>
+    <style>
+    h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    color: #555;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+table th, table td {
+    border: 1px solid #999;
+    padding: 8px;
+    text-align: center;
+}
+
+table thead {
+    background-color: #333;
+    color: #fff;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+form {
+    text-align: center;
+    margin: 10px;
+}
+.centered {
+    text-align: center;
+    background-color: #f2f2f2; 
+    padding: 10px; 
+    border: 1px solid #2980b9; 
+    border-radius: 5px; 
+    margin: 10px; 
+}
+.centered td {
+    color: white; 
+    font-weight: bold; 
+}
+tr td {
+    text-align: center; 
+    color: blue; 
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+input[type="hidden"] {
+    display: none;
+}
+ </style>
+</head>
+<body>
+    
+    <h1>Detalji natjecanja</h1>
+   <p style="text-align: center; font-weight: bold; font-size: 18px;">
+    Natjecanje: <span th:text="${natjecanje.name}"></span>
+</p>
+    
+    <h2>Raspored kola</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Kolo</th>
+                <th>Natjecatelj 1</th>
+                <th>Natjecatelj 2</th>
+                 <th>Rezultat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="runda : ${rasporedKola}">
+                <td th:text="${runda.brojKola}"></td>
+                <td th:text="${runda.natjecatelj1.name}"></td>
+                <td th:text="${runda.natjecatelj2.name}"></td>
+                <td th:text="${runda.rezultat}"></td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    
+     <p style="text-align: center; font-weight: bold; font-size: 18px;">Unesite rezultat u obliku "rezultat1:rezultat2". Na primjer, 3:2.</p>
+   <tbody>
+    <tr th:each="runda : ${rasporedKola}"> 
+    <div class="centered">
+    <td> KOLO </td>
+    <td th:text="${runda.brojKola}"></td>
+        <td th:text="${runda.natjecatelj1.name}"></td>
+        <td> VS </td>
+        <td th:text="${runda.natjecatelj2.name}"></td>
+        <td>
+        </div>
+            <!-- Obrazac za uređivanje rezultata -->
+            <form th:action="@{'/round'}" method="post" th:object="${runda}">
+                <!-- Skriveno polje za ID runde -->
+             <input type="hidden" id="id" name="id" th:value="${runda.id}" />
+       <input type="hidden" name="natjecatelj1.id" th:value="${runda.natjecatelj1.id}" />
+    <input type="hidden" name="natjecatelj2.id" th:value="${runda.natjecatelj2.id}" />
+    <input type="hidden" id="competitionId" name="competitionId" th:value="${natjecanje.id}" />
+                <!-- Polje za unos novog rezultata -->
+               <input type="text" id="rezultat" name="rezultat" th:value="*{rezultat}" pattern="\d+:\d+" title="Unesite rezultat u obliku 'broj:broj' (npr. 3:2, broj > 0)" />
+
+               
+                <button type="submit">Spremi</button>
+            </form>
+        </td>
+    </tr>
+</tbody>
+</body>
+</html>

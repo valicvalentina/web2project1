@@ -80,5 +80,27 @@ input[type="hidden"] {
             
         </tbody>
     </table>
+    
+     <h2>Raspored kola</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Kolo</th>
+                <th>Natjecatelj 1</th>
+                <th>Natjecatelj 2</th>
+                 <th>Rezultat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="runda : ${rasporedKola}">
+                <td th:text="${runda.brojKola}"></td>
+                <td th:text="${runda.natjecatelj1.name}"></td>
+                <td th:text="${runda.natjecatelj2.name}"></td>
+                <td th:text="${runda.rezultat}"></td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
     </body>
 </html>

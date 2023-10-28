@@ -119,12 +119,12 @@ import hr.fer.web2.teamsbackend.service.RoundService;
 		            return "error";
 		        }
 		        
-		     
+		        List<Runda> rasporedKola = roundService.getAllRoundsByCompetitionId(competitionId);
 		        List<Participant> natjecatelji = participantService.findByCompetitionId(competitionId);
 		        Collections.sort(natjecatelji, Comparator.comparingDouble(Participant::getBodovi).reversed());
 		        model.addAttribute("natjecanje", natjecanje);
 		        model.addAttribute("natjecatelji", natjecatelji);
-	    	
+		        model.addAttribute("rasporedKola", rasporedKola);
 	    	
 	    	return "poredak";
 	    }

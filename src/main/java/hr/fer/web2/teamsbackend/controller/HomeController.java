@@ -121,6 +121,19 @@ import hr.fer.web2.teamsbackend.service.RoundService;
 		        
 		        List<Runda> rasporedKola = roundService.getAllRoundsByCompetitionId(competitionId);
 		        List<Participant> natjecatelji = participantService.findByCompetitionId(competitionId);
+		        if (rasporedKola.isEmpty()) {
+		            rasporedKola = rasporedGenerator.generirajRasporedKola(natjecatelji);
+
+		            // Spremanje generirane runde u bazu
+		            for (Runda runda : rasporedKola) {
+		            	runda.setCompetition(natjecanje);
+		            	runda.setRezultat("0:0");
+		                roundService.spremiRundu(runda);
+		                runda.setBodoviPrvog(0);
+		                runda.setBodoviDrugog(0);
+		            }
+		        }
+		        Collections.sort(rasporedKola, Comparator.comparingInt(Runda::getBrojKola));
 		        Collections.sort(natjecatelji, Comparator.comparingDouble(Participant::getBodovi).reversed());
 		        model.addAttribute("natjecanje", natjecanje);
 		        model.addAttribute("natjecatelji", natjecatelji);

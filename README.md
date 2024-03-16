@@ -1,3 +1,8 @@
+Projekt je razvijen u sklopu kolegija Napredni Razvoj Programske Potpore za Web na Fakultetu elektrotehnike i računarstva.
+
+The project was developed as part of the Advanced Web Software Development course at the Faculty of Electrical Engineering and Computing.
+
+
 Potrebno je izraditi web-aplikaciju koja će služiti za praćenje natjecanja koja se odvijaju po jednokružnom sustavu natjecanja.
 
 Natjecanje može definirati prijavljeni korisnik tako da na početnoj stranici unese naziv natjecanja, popis natjecatelja (natjecatelji su odvojeni točkom zarez ili novim redom) i odabere sustav bodovanja u obliku pobjeda/remi/poraz, npr. 3/1/0 (nogomet), 1/0,5/0 (šah), 2/0/1 (košarka) i slično.
